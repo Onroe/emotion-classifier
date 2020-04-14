@@ -1,26 +1,29 @@
 <template>
       <div class="train">
         <template v-if="mode == 'train'">
-            <h1>TRAIN</h1>
+            <h1>TRAINING</h1>
         </template>
         <template v-else>
-            <h1>TEST MODEL</h1>
+            <h1>TESTING</h1>
         </template>
-        <Camera></Camera>
-        <b-form-select   id="use_case" :required="true" v-on:change="changeOption()">
-      <!-- This slot appears above the options from 'options' prop -->
-      <template v-slot:first>
-        <b-form-select-option :value="null" disabled >Please select an option</b-form-select-option>
-      </template>
+      <div class="flex">
+      <p class="col-md-3">SELECT OPTION:</p>
+      <span class="col-md-6">
+      <b-form-select   id="use_case" v-on:change="changeOption()" required>
       <!-- These options will appear after the ones from 'options' prop -->
       <b-form-select-option value="train">Train</b-form-select-option>
       <b-form-select-option value="test">Test</b-form-select-option>
-    </b-form-select>
+      </b-form-select>
+      </span>
+      </div>
+        <Camera></Camera>
 
         <template v-if="mode == 'train'">
-             <b-form-select v-model="selected" :options="emotions" id="emotionlist">
-            </b-form-select>
-            <b-button  variant="outline-primary" v-on:click="trainModel()">Train Model</b-button>
+            <div class="flex">
+             <span class="col-md-3"><p >SELECT EMOTION TO TRAIN</p></span>
+             <span class="col-md-6"><b-form-select v-model="selected" :options="emotions" id="emotionlist"> </b-form-select></span>
+             </div>
+             <b-button  variant="outline-primary" v-on:click="trainModel()">Train Model</b-button>
         </template>
         <template v-else>
             <b-button variant="success" v-on:click="getEmotion()">Get Emotion</b-button>
@@ -67,14 +70,14 @@ export default {
       this.addSample();
     },
     addSample() {
-      const img = tf.browser.fromPixels(this.$children[0].webcam.webcamElement);
+      const img = tf.browser.fromPixels(this.$children[1].webcam.webcamElement);
       const logits = this.mobilenet.infer(img, 'conv_preds');
       this.classifier.addExample(logits, parseInt(this.class, 10));
       console.log(logits);
       // console.log(this.$children[0]);
     },
     async getEmotion() {
-      const img = tf.browser.fromPixels(this.$children[0].webcam.webcamElement);
+      const img = tf.browser.fromPixels(this.$children[1].webcam.webcamElement);
       const logits = this.mobilenet.infer(img, 'conv_preds');
       const pred = await this.classifier.predictClass(logits);
       console.log(pred);
@@ -84,6 +87,13 @@ export default {
     changeOption() {
       const selected = document.getElementById('use_case');
       this.mode = selected.options[selected.selectedIndex].value;
+    },
+    async kerasOption() {
+      const model = await tf.loadLayersModel('cnnmodel.json');
+      const example = tf.fromPixels(this.$children[0].webcam.webcamElement); // for example
+      // const img = tf.browser.fromPixels(this.$children[0].webcam.webcamElement);
+      const prediction = model.predict(example);
+      console.log(prediction);
     },
     recordEmotion() {
       axios.post('http://localhost:5000/server/', {
@@ -95,3 +105,16 @@ export default {
   },
 };
 </script>
+<style scoped>
+div.flex {
+    display: flex;
+    border: 0px solid black;
+    margin: 5px;
+    padding: 5px;
+}
+
+div > * {
+  padding: 0 5px;
+}
+
+</style>
