@@ -3,6 +3,7 @@ Web based Flask &amp; Tensorflow application to identify emotions from webcam pi
 Transfer learning is used to rapidly train and customize the model to this task. 
 
 
+<<<<<<< HEAD
 
 ### Instructions
 To get a copy of the project running on your local machine.
@@ -55,5 +56,7 @@ $ npm run serve
 
 -Check the URL where app is running - http://localhost:8080/index.
 
+=======
+>>>>>>> cbf80ef6c12eba0642a72e3eb4e7fb458ed62892
 ![Screenshot](screenshot.png)
 
