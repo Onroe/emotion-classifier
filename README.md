@@ -48,7 +48,7 @@ $ npm run serve
 
 -Check the URL where app is running - http://localhost:8080/picture.
 
-![Screenshot](emotion.jpg)
+![Screenshot](emotion.JPG)
 
 -Check the URL where app is running - http://localhost:8080/index.
 
