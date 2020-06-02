@@ -33,7 +33,7 @@
 </template>
 <script>
 // @ is an alias to /src
-import Camera from '@/views/Camera.vue';
+import Camera from '@/views/WebCam.vue';
 import * as tf from '@tensorflow/tfjs';
 import * as mobilenetModule from '@tensorflow-models/mobilenet';
 import * as knnClassifier from '@tensorflow-models/knn-classifier';

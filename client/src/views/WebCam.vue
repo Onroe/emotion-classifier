@@ -10,7 +10,7 @@
 import { Webcam } from '../assets/webcam';
 
 export default {
-  name: 'Camera',
+  name: 'WebCam',
   data() {
     return {
       webcam: null,

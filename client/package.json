@@ -9,9 +9,20 @@
   },
   "dependencies": {
     "bootstrap-vue": "^2.9.0",
+    "chart.js": "^2.9.3",
+    "cropper": "^4.1.0",
+    "face": "^1.0.0",
+    "face-api.js": "^0.22.2",
+    "jquery": "^3.5.1",
+    "jquery.facedetection": "^2.0.3",
     "register-service-worker": "^1.6.2",
+    "sweetalert2": "^9.13.1",
+    "tfjs-node-save": "0.0.2",
+    "tracking": "^1.1.3",
     "vue": "^2.6.11",
+    "vue-icons": "^2.0.0",
     "vue-router": "^3.1.5",
+    "vue-swal": "^1.0.0",
     "vuex": "^3.1.2"
   },
   "devDependencies": {
@@ -24,6 +35,8 @@
     "eslint": "^6.7.2",
     "eslint-plugin-import": "^2.20.1",
     "eslint-plugin-vue": "^6.1.2",
+    "sass-loader": "^8.0.2",
+    "vue-materialize": "^1.0.0",
     "vue-template-compiler": "^2.6.11"
   }
 }

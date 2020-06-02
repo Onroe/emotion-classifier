@@ -1,10 +1,11 @@
 import Vue from 'vue';
+import tracking from 'tracking';
 import VueRouter from 'vue-router';
 import Index from '../views/Index.vue';
-import Camera from '../views/Camera.vue';
-import Test from '../views/Test.vue';
+import Camera from '../views/WebCam.vue';
+import Image from '../views/Picture.vue';
 
-Vue.use(VueRouter);
+Vue.use(VueRouter, tracking);
 
 const routes = [
 
@@ -14,15 +15,15 @@ const routes = [
     component: Index,
   },
   {
-    path: '/camera',
-    name: 'Camera',
+    path: '/webcamera',
+    name: 'WebCam',
     component: Camera,
   },
   {
 
-    path: '/test',
-    name: 'Test',
-    component: Test,
+    path: '/picture',
+    name: 'Picture',
+    component: Image,
   },
 ];
 

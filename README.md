@@ -1,6 +1,8 @@
 # Emotion Recognizer
-Web based Flask &amp; Tensorflow application to identify emotions from webcam pictures.
-Transfer learning is used to rapidly train and customize the model to this task. 
+Real time Facial Emotion classification using Tensorflow js. The model is trained on fer2013 dataset using keras.
+For each picture a chart is ploted showing scores of the different emotions and the dorminant emotion is the class emotion.
+-PICTURE :- A pretrained keras model is loaded into the browser and used to detect faces and classify emotions.
+-WEBCAM :-  Transfer learning is used to rapidly train and customize the model to this task for webcam pictures. 
 
 
 
@@ -24,19 +26,6 @@ $ git clone https://github.com/Onroe/emotion-classifier.git
 
 ####Extract the files 
 
-- Using your python terminal, navigate into the - server folder:
-
-```
-$ pip install -r requirements.txt
-
-```
-
-- Finally run the app:
-```
-$ flask run
-
-```
-
 ####Run the front end
 -Open a new nodejs terminal window, then navigate to the client folder:
 
@@ -52,6 +41,14 @@ Then run the app:
 $ npm run serve
 
 ```
+
+####NOTE
+- Make sure saved model is accessible over http as a json file:
+
+
+-Check the URL where app is running - http://localhost:8080/picture.
+
+![Screenshot](emotion.jpg)
 
 -Check the URL where app is running - http://localhost:8080/index.
 
