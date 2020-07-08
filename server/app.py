@@ -58,11 +58,3 @@ def gender_json():
               data = "could not read file"
        return jsonify(data)           
  
-#load json file with gender
-@app.route('/test/', methods=['GET', 'POST'])
-def getfile():
-    #file_name = request.form["file_name"]
-    path = "D:/Python/Flask/FlaskChat/api/model/emotion"
-    with open(path, 'r') as f:
-        file_content = f.read()
-    return file_content
