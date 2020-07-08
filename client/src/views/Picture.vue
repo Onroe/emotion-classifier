@@ -1,7 +1,7 @@
 <template>
  <div>
   <div class="demo-title">
-    <p><a href="" target="_parent"></a>FACIAL EMOTION CLASSIFICATION</p>
+    <p><a href="" target="_parent"></a>FACIAL EMOTION  and GENDER CLASSIFICATION</p>
   </div>
      <div class="row" id="card-item-container">
         <div class="col s12 m6">
@@ -30,6 +30,9 @@ const { tracking } = window;
 let COUNT_FACE = 0;
 let MODEL_EMOTION;
 let IS_MODEL_EMOTION_LOADED = false;
+let MODEL_GENDER;
+let IS_MODEL_GENDER_LOADED = false;
+const LABEL_GENDER = { 0: 'Female', 1: 'Male' };
 const LABEL_EMOTIONS = {
   0: 'Angry', 1: 'Disgust', 2: 'Fear', 3: 'Happy', 4: 'Sad', 5: 'Surprise', 6: 'Neutral',
 };
@@ -46,6 +49,7 @@ export default {
   },
   mounted() {
     this.initEmotion();
+    this.initGender();
   },
   methods: {
     tracking() {
@@ -78,8 +82,11 @@ export default {
           console.log('START');
           vue.cropFace(rect, face_id);
           const result_emotion = vue.getEmotion(document.getElementById(face_id), face_id);
+          const result_gender = vue.getGender(document.getElementById(face_id), face_id);
           console.log(result_emotion);
-          vue.generateResultChart(face_id, result_emotion);
+          console.log(result_gender);
+
+          vue.generateResultChart(face_id, result_emotion, result_gender);
           vue.clearFaceCanvas();
         });
       });
@@ -87,7 +94,7 @@ export default {
     async initEmotion() {
       const Url = 'http://localhost/track/model/emotion/model.json';
       MODEL_EMOTION = await tf.loadLayersModel(Url);
-      console.log('Model Emotion Loaded');
+      console.log('Emotion Model Loaded');
 
       // Warm up network
       MODEL_EMOTION.predict(tf.zeros([1, 64, 64, 1]));
@@ -95,10 +102,27 @@ export default {
       // this.$bvToast.toast('Model Emotion Loaded.');
       this.tracking();
     },
+    async initGender() {
+      const Url = 'http://localhost/track/model/gender/model.json';
+      MODEL_GENDER = await tf.loadLayersModel(Url);
+      console.log('Gender Model  Loaded');
+
+      // Warm up network
+      MODEL_GENDER.predict(tf.zeros([1, 64, 64, 1]));
+      IS_MODEL_GENDER_LOADED = true;
+      this.tracking();
+    },
     getEmotion(im, face_id) {
       console.log(im);
       const input = this.process_input(im);
       const result = this.predictEmotion(input);
+      console.log(result);
+      return result;
+    },
+    getGender(im, face_id) {
+      console.log(im);
+      const input = this.process_input(im);
+      const result = this.predictGender(input);
       console.log(result);
       return result;
     },
@@ -124,6 +148,16 @@ export default {
 
       const totalTime = performance.now() - startTime;
       return { result, label: LABEL_EMOTIONS[label_index], percent: label_percent };
+    },
+    predictGender(input) {
+      var r = MODEL_GENDER.predict(input);
+      var result = r.dataSync();
+      var tresult = tf.tensor(result);
+      var label_index = tf.argMax(tresult).dataSync()[0];
+
+      var label_percent = result[label_index].toFixed(4) * 100;
+
+      return { result, label: LABEL_GENDER[label_index], percent: label_percent };
     },
     cropFace(rect, face_id) {
       console.log('STARTED');
@@ -172,7 +206,7 @@ export default {
       $('.canvas-face').remove();
     },
 
-    generateResultChart(face_id, result_emotion) {
+    generateResultChart(face_id, result_emotion, result_gender) {
       var chart_emotion_id = `${face_id}_emotion_chart`;
       var chart_gender_id = `${face_id}_gender_chart`;
       var html = `
@@ -182,6 +216,9 @@ export default {
                   <div class="chart-result-profile"><canvas id="${face_id}_profile_chart" width="100" height="100"></canvas></div>
                   <div>
                       <canvas id="${chart_emotion_id}"></canvas>
+                  </div>
+                  <div>
+                      <canvas id="${chart_gender_id}"></canvas>
                   </div>
                 </div>
               </div>
@@ -241,6 +278,33 @@ export default {
                 'rgb(54, 162, 235)',
                 'rgb(153, 102, 255)',
                 'rgb(201, 203, 207)',
+              ],
+              borderWidth: 1,
+            },
+          ],
+        },
+        options,
+      });
+
+      var chart_emotion = new Chart(document.getElementById(chart_gender_id), {
+        type: 'horizontalBar',
+        data: {
+          labels: [
+            'Female',
+            'Male',
+          ],
+          datasets: [
+            {
+              label: `Gender: ${result_gender.label}`,
+              data: result_gender.result,
+              fill: false,
+              backgroundColor: [
+                'rgba(255, 99, 132, 0.2)',
+                'rgba(75, 192, 192, 0.2)',
+              ],
+              borderColor: [
+                'rgb(255, 99, 132)',
+                'rgb(75, 192, 192)',
               ],
               borderWidth: 1,
             },
