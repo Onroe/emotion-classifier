@@ -1,8 +1,9 @@
 # Emotion Recognizer
 Real time Facial Emotion classification using Tensorflow js. The model is trained on fer2013 dataset using keras.
 For each picture a chart is ploted showing scores of the different emotions and the dorminant emotion is the class emotion.
--PICTURE :- A pretrained keras model is loaded into the browser and used to detect faces and classify emotions.
--WEBCAM :-  Transfer learning is used to rapidly train and customize the model to this task for webcam pictures. 
+
+PICTURE :- A pretrained keras model is loaded into the browser and used to detect faces and classify emotions.
+WEBCAM :-  Transfer learning is used to rapidly train and customize the model to this task for webcam pictures. 
 
 
 
