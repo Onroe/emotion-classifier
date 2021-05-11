@@ -25,7 +25,6 @@ import $ from 'jquery';
 import * as tf from '@tensorflow/tfjs';
 import Chart from 'chart.js';
 
-
 const { tracking } = window;
 let COUNT_FACE = 0;
 let MODEL_EMOTION;
@@ -187,7 +186,6 @@ export default {
       ctx_color.drawImage(img, x * ratio, y * ratio, w * ratio, h * ratio, 0, 0, 80, 80);
       document.body.appendChild(canvas_color);
 
-
       // Convert Image to Greyscale
       const imageData = ctx.getImageData(0, 0, canvas.width, canvas.height);
       const { data } = imageData;
@@ -314,7 +312,6 @@ export default {
       });
     },
 
-
   },
 };
 </script>
@@ -325,7 +322,6 @@ export default {
 @import "https://use.fontawesome.com/releases/v5.0.10/css/all.css";
 @import "https://fontlibrary.org/face/cmu-sans-serif";
 @import "https://fonts.googleapis.com/icon?family=Material+Icons";
-
 
 .rects {
     border: 5px solid #a64ceb;
