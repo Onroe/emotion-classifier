@@ -13,11 +13,11 @@
     "@tensorflow/tfjs": "^4.2.0",
     "axios": "^1.2.2",
     "bootstrap": "^5.2.3",
-    "bootstrap-vue": "^2.21.2",
+    "bootstrap-vue": "^2.23.1",
     "chart.js": "^2.9.4",
     "cropper": "^4.1.0",
     "face": "^1.0.0",
-    "face-api.js": "^0.22.2",
+    "face-api.js": "^0.20.0",
     "jquery": "^3.6.0",
     "jquery.facedetection": "^2.0.3",
     "register-service-worker": "^1.7.2",
@@ -31,17 +31,17 @@
     "vuex": "^3.6.2"
   },
   "devDependencies": {
-    "@vue/cli-plugin-eslint": "~4.2.0",
-    "@vue/cli-plugin-pwa": "~4.2.0",
-    "@vue/cli-plugin-router": "~4.2.0",
+    "@vue/cli-plugin-eslint": "^5.0.8",
+    "@vue/cli-plugin-pwa": "^5.0.8",
+    "@vue/cli-plugin-router": "^5.0.8",
     "@vue/cli-plugin-vuex": "~4.2.0",
-    "@vue/cli-service": "^4.5.15",
+    "@vue/cli-service": "^3.3.1",
     "@vue/eslint-config-airbnb": "^5.3.0",
     "eslint": "^6.7.2",
     "eslint-plugin-import": "^2.25.4",
     "eslint-plugin-vue": "^6.1.2",
     "sass-loader": "^8.0.2",
-    "vue-materialize": "^1.0.0",
-    "vue-template-compiler": "^2.6.14"
+    "vue-materialize": "^0.0.2",
+    "vue-template-compiler": "^0.1.0"
   }
 }
